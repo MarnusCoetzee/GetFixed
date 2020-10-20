@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tradeconnect-fbdd5": {
+      "hosting": {
+        "getfixednew": [
+          "tradeconnect-fbdd5"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tradeconnect-fbdd5"
+  }
+}
