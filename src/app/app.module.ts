@@ -13,6 +13,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SplashScreenComponent } from './splash-screen/splash-screen/splash-screen.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 firebase.initializeApp(environment.firebase);
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ firebase.initializeApp(environment.firebase);
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

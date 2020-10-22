@@ -57,10 +57,10 @@ export class SearchDialogComponent implements OnInit {
 
   onClickNavigateCategories() {
     const query = this.searchString;
+    const validLocation = this.validLocation;
     console.log(query);
     this.dialogRef.close();
-    console.log(query, this.validLocation);
-    // this.router.navigate(['catalogue/filtered-artists', query]);
+    this.router.navigate(['client/view-all', {  query: query, validLocation: validLocation } ]);
   }
 
   private requestLocation() {
