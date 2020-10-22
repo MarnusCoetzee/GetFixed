@@ -1,0 +1,14 @@
+.search_form {
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.search_button {
+  display: grid;
+  place-content: center;
+}
+
+.search_button button {
+  height: 46px;
+}

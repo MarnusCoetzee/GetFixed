@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SearchDialogComponent } from '../search-dialog/search-dialog.component';
 
 @Component({
   selector: 'app-client-landing-page',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientLandingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onClickOpenSearchDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = false;
+
+    this.dialog.open(SearchDialogComponent, dialogConfig)
   }
 
 }

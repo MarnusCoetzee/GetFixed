@@ -11,6 +11,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import * as firebase from 'firebase';
+import { ServiceWorkerModule } from '@angular/service-worker';
 firebase.initializeApp(environment.firebase);
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ firebase.initializeApp(environment.firebase);
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

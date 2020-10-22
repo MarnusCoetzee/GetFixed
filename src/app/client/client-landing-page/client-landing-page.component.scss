@@ -39,6 +39,25 @@
   transform: scale(1.1);
 }
 
+.search_button {
+  display: grid;
+  place-content: center;
+}
+
+.search_button button {
+  height: 46px;
+}
+
+.para {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.para p {
+  text-align: center;
+  font-size: larger;
+}
+
 // change featured category cards to side scroll for tablets & smaller
 @media only screen and (max-width: 720px) {
 
@@ -47,6 +66,9 @@
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .card_container {
@@ -60,5 +82,9 @@
 
   .card_container mat-card {
     margin-bottom: 15px;
+  }
+
+  .para p {
+    text-align: start;
   }
 }
