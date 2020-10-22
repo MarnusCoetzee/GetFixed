@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "dist/getfixednew",
+    "site": "getfixed",
     "ignore": [
       "firebase.json",
       "**/.*",
