@@ -1,1 +1,43 @@
-<p>view-all-fixers works!</p>
+<div *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div *ngIf="!isLoading">
+  <div class="container">
+    <!--Show database result if a valid location has been set-->
+    <div *ngIf="validLocation">
+      <div class="result_container">
+        <div class="heading">
+          <h1>{{ fixerCategory }} in your area</h1>
+          <hr>
+        </div>
+        <div class="card_container" *ngIf="featuredFixers?.length > 0">
+          <h2>Featured Fixers</h2>
+          <div *ngFor="let featured of featuredFixers">
+            <mat-card>
+
+            </mat-card>
+          </div>
+        </div>
+        <div class="card_container" *ngIf="filteredUsers?.length > 0">
+          <div *ngFor="let filteredUser of filteredUsers">
+            <mat-card>
+
+            </mat-card>
+          </div>
+        </div>
+        <div class="card_container" *ngIf="filteredUsers?.length == 0">
+          <h2>No fixers in your area</h2>
+          <button mat-raised-button color="primary" (click)="onClickNavigateBack()">Go Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!--Show map if no valid location is used-->
+    <div *ngIf="!validLocation">
+      <div class="heading">
+        <h1>Choose your location to find the best fixers in your area.</h1>
+      </div>
+    </div>
+  </div>
+</div>

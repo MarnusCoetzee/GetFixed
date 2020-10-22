@@ -60,7 +60,7 @@ export class SearchDialogComponent implements OnInit {
     const validLocation = this.validLocation;
     console.log(query);
     this.dialogRef.close();
-    this.router.navigate(['client/view-all', {  query: query, validLocation: validLocation } ]);
+    this.router.navigate(['client/view-all', query, validLocation ]);
   }
 
   private requestLocation() {

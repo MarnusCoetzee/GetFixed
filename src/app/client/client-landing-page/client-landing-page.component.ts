@@ -23,6 +23,7 @@ export class ClientLandingPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = false;
+    dialogConfig.minWidth = "350px";
 
     this.dialog.open(SearchDialogComponent, dialogConfig)
   }
