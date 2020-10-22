@@ -9,11 +9,14 @@ import { SearchDialogComponent } from '../search-dialog/search-dialog.component'
 })
 export class ClientLandingPageComponent implements OnInit {
 
+  validLocation: boolean;
+
   constructor(
     private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
+    this.requestLocation();
   }
 
   onClickOpenSearchDialog() {
@@ -22,6 +25,19 @@ export class ClientLandingPageComponent implements OnInit {
     dialogConfig.autoFocus = false;
 
     this.dialog.open(SearchDialogComponent, dialogConfig)
+  }
+
+  private requestLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.validLocation = true;
+      }, error => {
+        if (error.PERMISSION_DENIED) {
+          console.log('location denied');
+          this.validLocation = false;
+        }
+      });
+    }
   }
 
 }

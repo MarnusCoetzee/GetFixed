@@ -12,11 +12,13 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import * as firebase from 'firebase';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { SplashScreenComponent } from './splash-screen/splash-screen/splash-screen.component';
 firebase.initializeApp(environment.firebase);
 @NgModule({
   declarations: [
     AppComponent,
-    ShellComponent
+    ShellComponent,
+    SplashScreenComponent
   ],
   imports: [
     BrowserModule,

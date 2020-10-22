@@ -18,6 +18,8 @@ export class SearchDialogComponent implements OnInit {
 
   stateGroups = stateGroups;
 
+  validLocation: boolean;
+
   stateForm: FormGroup = this.fb.group({
     stateGroup: ['', Validators.required]
   });
@@ -36,6 +38,7 @@ export class SearchDialogComponent implements OnInit {
       startWith(''),
       map(value => this._filterGroup(value))
     );
+    this.requestLocation();
   }
 
   private _filterGroup(value: string): StateGroup[] {
@@ -56,7 +59,21 @@ export class SearchDialogComponent implements OnInit {
     const query = this.searchString;
     console.log(query);
     this.dialogRef.close();
+    console.log(query, this.validLocation);
     // this.router.navigate(['catalogue/filtered-artists', query]);
+  }
+
+  private requestLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.validLocation = true;
+      }, error => {
+        if (error.PERMISSION_DENIED) {
+          console.log('location denied');
+          this.validLocation = false;
+        }
+      });
+    }
   }
 
 }

@@ -25,6 +25,7 @@
     "@angular/service-worker": "~10.0.6",
     "bootstrap": "^4.5.3",
     "firebase": "^7.24.0",
+    "geofirex": "^0.1.0",
     "jquery": "^3.5.1",
     "rxjs": "^6.5.5",
     "tslib": "^2.0.0",
