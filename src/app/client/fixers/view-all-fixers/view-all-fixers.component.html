@@ -21,10 +21,19 @@
               <div style="text-align: center;">
                 <mat-card-title style="margin-top: 15px;">{{ featured?.fullName }}</mat-card-title>
                 <mat-card-title style="margin-top: 15px;">{{ featured?.copmanyName }}</mat-card-title>
+                <mat-card-subtitle>{{ featured?.companyDescription }}</mat-card-subtitle>
                 <mat-card-title style="margin-top: 15px;">{{ featured?.hitMetadata.distance | number:'1.0-0' }}km away from you</mat-card-title>
               </div>
               <div *ngIf="featured?.hasRating">
-
+                <ngb-rating readonly="true" rate="{{ featured?.totalRatings / featured?.ratingsCount }}" max="5">
+                  <ng-template let-fill="fill">
+                    <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                  </ng-template>
+                </ngb-rating>
+                <button mat-raised-button>View Reviews</button>
+              </div>
+              <div class="contact_btn">
+                <button mat-raised-button (click)="onClickOpenContactUserBottomSheet(featured?.uid, featured?.email, featured?.cellNum)">Contact Fixer</button>
               </div>
             </mat-card>
           </div>
@@ -38,6 +47,7 @@
               <div style="text-align: center;">
                 <mat-card-title style="margin-top: 15px;">{{ filteredUser?.fullName }}</mat-card-title>
                 <mat-card-title style="margin-top: 15px;">{{ filteredUser?.companyName }}</mat-card-title>
+                <mat-card-subtitle>{{ filteredUser?.companyDescription }}</mat-card-subtitle>
                 <mat-card-title style="margin-top: 15px;">{{ filteredUser?.hitMetadata.distance | number:'1.0-0' }}km away from you</mat-card-title>
               </div>
               <div *ngIf="filteredUser?.hasRating" class="rating">
@@ -47,6 +57,9 @@
                   </ng-template>
                 </ngb-rating>
                 <button mat-raised-button>View Reviews</button>
+              </div>
+              <div class="contact_btn">
+                <button mat-raised-button (click)="onClickOpenContactUserBottomSheet(filteredUser?.uid, filteredUser?.email, filteredUser?.cellNum)">Contact Fixer</button>
               </div>
             </mat-card>
           </div>

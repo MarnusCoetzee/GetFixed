@@ -3,6 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as geofirex from 'geofirex';
 import * as firebase from 'firebase';
 import { Subscription } from 'rxjs';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { ContactClientBottomSheetComponent } from '../contact-client-bottom-sheet/contact-client-bottom-sheet.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewRatingsDialogComponent } from '../view-ratings-dialog/view-ratings-dialog.component';
 @Component({
   selector: 'app-view-all-fixers',
   templateUrl: './view-all-fixers.component.html',
@@ -41,7 +45,9 @@ export class ViewAllFixersComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private matBottomSheet: MatBottomSheet,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -105,11 +111,13 @@ export class ViewAllFixersComponent implements OnInit {
   }
 
   onClickOpenReviewsDialog(id: string) {
-
+    this.matDialog.open(ViewRatingsDialogComponent);
   }
 
-  onClickOpenContactUserBottomSheet(cellNum: string, email: string) {
-
+  onClickOpenContactUserBottomSheet(id: string, email: string, cellNumber: number) {
+    this.matBottomSheet.open(ContactClientBottomSheetComponent, {
+      data: { uid: id, email: email, cellNumber: cellNumber }
+    });
   }
 
   onClickDragMarker(event: google.maps.MouseEvent) {

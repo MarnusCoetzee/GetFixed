@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-contact-client-bottom-sheet',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactClientBottomSheetComponent implements OnInit {
 
-  constructor() { }
+  uid: string;
+  email: string;
+  cellNumber: number;
+
+  constructor(
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
+  ) {
+    this.uid = data.uid;
+    this.email = data.email;
+    this.cellNumber = data.cellNumber;
+  }
 
   ngOnInit(): void {
   }
