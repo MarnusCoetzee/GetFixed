@@ -15,8 +15,78 @@
 }
 
 .card_container button {
-  width: 50%;
-  margin-right: 25%;
-  margin-left: 25%;
+  width: 30%;
+  margin-right: 35%;
+  margin-left: 35%;
   height: 46px;
+  margin-top: 1rem;
+}
+
+.card_container mat-card {
+  width: 70%;
+  margin-right: 15%;
+  margin-left: 15%;
+  margin-bottom: 15px;
+}
+
+.selfie {
+  display: grid;
+  place-content: center;
+}
+
+.selfie img {
+  max-height: 100px;
+  border-radius: 25px;
+}
+
+.rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.star {
+  font-size: 1.6rem;
+  color: #b0c4de;
+}
+.filled {
+  color: gold;
+}
+
+.mapbtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapbtn button {
+  margin: 1rem;
+  height: 46px;
+}
+
+// .map {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+
+@media only screen and (max-width: 600px) {
+  .card_container mat-card {
+    width: 95%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    margin-bottom: 10px;
+  }
+
+  .card_container button {
+    width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
+    height: 46px;
+    margin-top: 10px;
+  }
 }

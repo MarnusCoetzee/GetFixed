@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as geofirex from 'geofirex';
 import * as firebase from 'firebase';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-view-all-fixers',
   templateUrl: './view-all-fixers.component.html',
@@ -23,7 +24,7 @@ export class ViewAllFixersComponent implements OnInit {
   defaultLongitude: number = 28.0473;
   defaultCenter: google.maps.LatLngLiteral;
 
-  zoom = 15;
+  zoom = 8;
 
   isLoading: boolean;
 
@@ -31,6 +32,12 @@ export class ViewAllFixersComponent implements OnInit {
   allFixers: Array<any>;
   featuredFixers: Array<any>;
   notFeaturedFixers: Array<any>;
+
+  geoQuerySubscription: Subscription;
+
+  options: google.maps.MarkerOptions = {
+    draggable: true
+  }
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -76,7 +83,7 @@ export class ViewAllFixersComponent implements OnInit {
     const radius = 50;
     const field = 'position';
     // @ts-ignore
-    this.geo.query('users').within(center, radius, field).subscribe(userResults => {
+    this.geoQuerySubscription = this.geo.query('users').within(center, radius, field).subscribe(userResults => {
       this.allFixers = userResults;
       this.filteredUsers = this.allFixers.filter((fixerResult) => {
         this.isLoading = false;
@@ -95,6 +102,59 @@ export class ViewAllFixersComponent implements OnInit {
 
   onClickNavigateBack() {
     this.router.navigate(['client']);
+  }
+
+  onClickOpenReviewsDialog(id: string) {
+
+  }
+
+  onClickOpenContactUserBottomSheet(cellNum: string, email: string) {
+
+  }
+
+  onClickDragMarker(event: google.maps.MouseEvent) {
+    const latitudeObject = event.latLng.toUrlValue();
+    const latitude = parseFloat(latitudeObject.slice(0, 10));
+    const longitude = parseFloat(latitudeObject.slice(10, 21).replace(',', ""));
+
+    this.defaultLatitude = latitude;
+    this.defaultLongitude = longitude;
+  }
+
+  onClickBeginQueryFromNewLocation() {
+    this.isLoading = true;
+    const lat = this.defaultLatitude;
+    const long = this.defaultLongitude;
+    const query = this.fixerCategory;
+    const center = this.geo.point(lat, long);
+    const radius = 50;
+    const field = 'position';
+    // @ts-ignore
+    this.geoQuerySubscription = this.geo.query('users').within(center, radius, field).subscribe(userResults => {
+      this.allFixers = userResults;
+      this.filteredUsers = this.allFixers.filter((fixerResult) => {
+        this.isLoading = false;
+        return fixerResult.skills.includes(query);
+      });
+      this.featuredFixers = this.filteredUsers.filter((fixerResult) => {
+        return fixerResult.boostStatus === true;
+      }).slice(0, 9);
+      this.notFeaturedFixers = this.filteredUsers.filter((fixerResult) => {
+        return fixerResult.boostStatus === false;
+      });
+      console.log(this.notFeaturedFixers);
+    });
+    this.validLocation = true;
+    this.isLoading = false;
+    console.log('searching the database for ' + query + ' in ' + query + query);
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    if (this.geoQuerySubscription) {
+      this.geoQuerySubscription.unsubscribe();
+    }
   }
 
 }
